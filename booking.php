@@ -45,7 +45,7 @@ if(isset($_POST['submit'])) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Book Session | LensFlow</title>
+    <title>Book Session | VA Photographs</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
 
