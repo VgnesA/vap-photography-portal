@@ -58,7 +58,7 @@ if(isset($_POST['submit'])) {
 <nav>
 
     <div class="logo">
-        LensFlow
+        VA Photographs
     </div>
 
     <ul>
