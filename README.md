@@ -34,6 +34,12 @@ This project combines photography portfolio presentation with backend business l
   * Update booking status
   * Delete bookings
 
+### SQL Injection Notes (Security)
+
+This project uses **prepared statements** (e.g., `mysqli_prepare` + `mysqli_stmt_bind_param`) for database writes/updates in `booking.php` and `dashboard.php`. Prepared statements ensure user input is sent to MySQL as **bound parameters**, not concatenated into SQL strings—helping prevent **SQL injection**.
+
+Additionally, the booking form performs basic required-field checks before inserting into the database.
+
 ---
 
 ## Technologies Used
@@ -60,29 +66,33 @@ This project combines photography portfolio presentation with backend business l
 
 ## Project Structure
 
-```bash
-vap/
-│
+```text
+vap-photography-portal-main/
+
 ├── index.php
 ├── booking.php
 ├── dashboard.php
+├── README.md
 │
 ├── includes/
-│   └── db.php
+│   ├── db.php
+│   ├── header.php
+│   └── footer.php
 │
 ├── assets/
 │   ├── css/
 │   │   └── style.css
-│   │
 │   ├── js/
 │   │   └── script.js
-│   │
-│   ├── images/
-│   │
-│   └── videos/
-│
-└── README.md
+│   └── images/
+│       ├── profile.jpg
+│       ├── fb.png
+│       ├── ig.png
+│       ├── wa.png
+│       └── photo1.JPG ... photo10.JPG
+
 ```
+
 
 ---
 
@@ -154,7 +164,7 @@ Create the `bookings` table.
 Open the project in browser:
 
 ```bash
-http://localhost/vap
+http://localhost/vap-photography-portal-main/index.php
 ```
 
 ---
