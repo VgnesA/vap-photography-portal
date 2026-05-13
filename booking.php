@@ -2,101 +2,72 @@
 
 include 'includes/db.php';
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
-    $name = $_POST['name'];
+    $name = trim($_POST['name'] ?? '');
 
-    $email = $_POST['email'];
+    $email = trim($_POST['email'] ?? '');
 
-    $phone = $_POST['phone'];
+    $phone = trim($_POST['phone'] ?? '');
 
-    $session_type = $_POST['session_type'];
+    $session_type = trim($_POST['session_type'] ?? '');
 
-    $details = $_POST['details'];
+    $details = trim($_POST['details'] ?? '');
 
     $status = "Pending";
 
-    $query = "INSERT INTO bookings
-(name, email, phone, session_type, details, status)
-    VALUES
+    // Basic defense-in-depth (prevents notices and reduces bad data)
+    if ($name === '' || $email === '' || $phone === '' || $session_type === '') {
+        echo "Please fill in all required fields.";
+        exit;
+    }
 
-    ('$name', '$email', '$phone',
-'$session_type', '$details', '$status')";
+    $query = "INSERT INTO bookings (name, email, phone, session_type, details, status)
+              VALUES (?, ?, ?, ?, ?, ?)";
 
-    $result = mysqli_query($conn, $query);
+    $stmt = mysqli_prepare($conn, $query);
+    if ($stmt === false) {
+        echo "Unable to submit booking.";
+        exit;
+    }
 
-    if($result) {
+    mysqli_stmt_bind_param($stmt, "ssssss", $name, $email, $phone, $session_type, $details, $status);
+
+    $result = mysqli_stmt_execute($stmt);
+
+    if ($result) {
 
         echo "Booking Submitted Successfully!";
 
     } else {
 
-        echo mysqli_error($conn);
+        // Don’t expose DB errors to users (can leak schema/SQL details)
+        echo "Booking submission failed.";
     }
 }
-
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Book Session | VA Photographs</title>
-
-    <link rel="stylesheet" href="assets/css/style.css">
-
-</head>
-
-<body>
-
-<!-- ================= NAVBAR ================= -->
-
-<nav>
-
-    <div class="logo">
-        VA Photographs
-    </div>
-
-    <ul>
-
-        <li><a href="index.php">Home</a></li>
-
-        <li><a href="index.php#about">About</a></li>
-
-        <li><a href="index.php#gallery">Gallery</a></li>
-
-        <li><a href="booking.php">Book Session</a></li>
-
-        <li><a href="index.php#contact">Contact</a></li>
-
-    </ul>
-
-</nav>
+<?php
+// Header/footer are shared across pages.
+$navLogo = 'VA Photographs';
+?>
 
 <!-- ================= BOOKING SECTION ================= -->
+<?php include 'includes/header.php'; ?>
 
 <section id="contact">
 
     <h2>Book a Photography Session</h2>
 
-<form method="POST">
-<input type="text"
-       name="name"
-       placeholder="Your Name">
+    <form method="POST">
+        <input type="text" name="name" placeholder="Your Name">
 
-<input type="email"
-       name="email"
-       placeholder="Your Email">
+        <input type="email" name="email" placeholder="Your Email">
 
-<input type="tel"
-       name="phone"
-       placeholder="Phone Number">
+        <input type="tel" name="phone" placeholder="Phone Number">
 
-<select name="session_type">
+        <select name="session_type">
             <option>
                 Select Session Type
             </option>
@@ -115,26 +86,15 @@ if(isset($_POST['submit'])) {
 
         </select>
 
-<textarea name="details"
-placeholder="Additional Details"></textarea>
+        <textarea name="details" placeholder="Additional Details"></textarea>
 
-<button type="submit" name="submit">
-    Submit Booking
-</button>        
+        <button type="submit" name="submit">
+            Submit Booking
+        </button>
 
     </form>
 
 </section>
 
-<!-- ================= FOOTER ================= -->
 
-<footer>
-
-    <p>
-        © 2026 VA Photographs | Photography Booking Portal
-    </p>
-
-</footer>
-
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

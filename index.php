@@ -1,43 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$navLogo = 'VA Photographs';
+?>
 
-<head>
+<!-- Shared navbar/head/footer -->
+<?php include 'includes/header.php'; ?>
 
-    <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>VA Photographs</title>
-
-    <link rel="stylesheet" href="assets/css/style.css">
-
-</head>
-
-<body>
-
-<!-- ================= NAVBAR ================= -->
-
-<nav>
-
-    <div class="logo">
-        VA Photographs
-    </div>
-
-    <ul>
-
-        <li><a href="#home">Home</a></li>
-
-        <li><a href="#about">About</a></li>
-
-        <li><a href="#gallery">Gallery</a></li>
-
-        <li><a href="booking.php">Book Session</a></li>
-
-        <li><a href="#contact">Contact</a></li>
-
-    </ul>
-
-</nav>
 
 <!-- ================= HERO SECTION ================= -->
 
@@ -136,23 +104,19 @@
 
     <!-- Videos Section -->
 
-    <div id="videos"
-         class="portfolio-content"
-         style="display:none;">
+    <div id="videos" class="portfolio-content" style="display:none;">
 
         <div class="video-container">
 
             <video controls width="300">
 
-                <source src="assets/videos/video1.mp4"
-                        type="video/mp4">
+                <source src="assets/videos/video1.mp4" type="video/mp4">
 
             </video>
 
             <video controls width="300">
 
-                <source src="assets/videos/video2.mp4"
-                        type="video/mp4">
+                <source src="assets/videos/video2.mp4" type="video/mp4">
 
             </video>
 
@@ -161,7 +125,7 @@
     </div>
 
 </section>
-   
+
 <!-- ================= SERVICES SECTION ================= -->
 
 <section id="services">
@@ -235,26 +199,23 @@
 
     <div class="social-icons">
 
-        <a href="https://www.facebook.com/"
-           target="_blank">
+        <a href="https://www.facebook.com/" target="_blank">
 
             <img src="assets/images/fb.png">
 
         </a>
-    
-        <a href="https://www.instagram.com/vignesh_alle/"
-       target="_blank">
 
-        <img src="assets/images/ig.png" alt="Instagram">
+        <a href="https://www.instagram.com/vignesh_alle/" target="_blank">
 
-    </a>
+            <img src="assets/images/ig.png" alt="Instagram">
 
-    <a href="https://wa.me/14379934826"
-       target="_blank">
+        </a>
 
-        <img src="assets/images/wa.png" alt="WhatsApp">
+        <a href="https://wa.me/14379934826" target="_blank">
 
-    </a>
+            <img src="assets/images/wa.png" alt="WhatsApp">
+
+        </a>
 
 
     </div>
@@ -265,10 +226,13 @@
 <footer>
 
     <p>
-        © 2026 VA Photographs 
+        © 2026 VA Photographs
     </p>
 
 </footer>
 <script src="assets/js/script.js"></script>
+<?php include 'includes/footer.php'; ?>
+
 </body>
+
 </html>
